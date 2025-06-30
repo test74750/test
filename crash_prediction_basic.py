@@ -1,11 +1,28 @@
+import argparse
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 
+
+def parse_args():
+    """Parse command-line options."""
+    parser = argparse.ArgumentParser(
+        description="Predict crash values from historical data"
+    )
+    parser.add_argument(
+        "--csv",
+        default="crash_data.csv",
+        help="Path to the crash data CSV file",
+    )
+    return parser.parse_args()
+
+
+args = parse_args()
+
 # Load your data
-data = pd.read_csv('crash_data.csv')  # Assume your data is in this CSV
+data = pd.read_csv(args.csv)  # Load crash data from the specified CSV
 
 # Visualize the data
 plt.plot(data['round'], data['crash_value'])
